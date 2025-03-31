@@ -11,8 +11,7 @@ This project contains a Bash and AWK-based workflow to process, clean, and combi
 ## 📂 Files Included
 - `XmasTrial.bsh`: Main Bash driver script  
 - `header.awk`: Adjusts the header of each snapshot  
-- `body.awk`: Filters and scales body data (positions, energies, etc.)  
-- `flowchart.png`: Visual diagram of the data pipeline
+- `body.awk`: Filters and scales body data (positions, energies, etc.) 
 
 ## ▶️ How to Use
 ```bash
