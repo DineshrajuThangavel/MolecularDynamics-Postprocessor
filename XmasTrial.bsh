@@ -1,0 +1,63 @@
+#!/usr/bin/bash
+
+# Flags to keep track of files processed
+Header_Count=0
+Body_Count=0
+i=1
+
+# Arguments (File name) passed in the command line
+prefix=$1
+extension=$2
+counter=$3
+
+# A small introduction about the code
+echo -e "\n"
+echo "INTRO"
+echo "------"
+echo "- The file has two key code portions: header.awk & body.awk"
+echo "- header.awk does scaling and removal of fields only in the header section"
+echo "- body.awk does scaling and removal of fields in the non header section"
+echo "**- Note: The code identifies the columns to be removed based on its title (irrespective of its order)" 
+echo -e "\n\n"
+
+
+# Receiving final output file name as input from user
+read -p "Please enter the output file name: " outputfile
+
+echo -e "--------------------------------------------------"
+
+# while Loop to feed all the snapshot files
+while [ $i -le $counter ]; do
+
+	# Condition that checks and displays the file's existence
+	if [ -e $prefix.$i.$extension ]; then
+	echo -e "File found:     $prefix.$i.$extension ..."
+
+		# portion that does header formatting (Key code: header.awk) 
+		if [ $Header_Count -eq 0 ]; then
+		awk -f header.awk "$prefix.$i.$extension" > $outputfile
+		# Flag that marks the entry of header details
+		Header_Count=1
+		Header_file=$prefix.$i.$extension
+		fi
+
+		# Portion that does non header formatting (Key code: body.awk)
+		if [ $Header_Count -ne 0 ]; then
+		awk -f body.awk "$prefix.$i.$extension" >> $outputfile
+		# Flag that marks the total number of non header portions appended
+		Body_Count=$((Body_Count+1))
+		fi
+
+
+	else
+	echo -e "File not found: $prefix.$i.$extension"
+	fi
+
+	# Flag that keeps track of total number of files need to be executed as per the user input
+	i=$((i+1))
+
+done 
+
+echo -e "--------------------------------------------------\n"
+echo -e "Total No. of files detected and appended: $Body_Count"
+echo -e "\n"

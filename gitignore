@@ -1,0 +1,17 @@
+# Output files
+*.out
+*.log
+*.txt
+*.snapshot
+
+# Temporary or backup files
+*~
+*.bak
+
+# Core dumps or binaries
+core
+a.out
+
+# Hidden system files
+.DS_Store
+Thumbs.db
