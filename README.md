@@ -1,4 +1,4 @@
-# 📦 MD Snapshot Processor
+# 📦 Molecular Dynamics Snapshot Processor
 
 This project contains a Bash and AWK-based workflow to process, clean, and combine multiple `.snapshot` files generated from parallel molecular dynamics simulations.
 
